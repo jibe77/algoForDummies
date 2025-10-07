@@ -1,0 +1,9 @@
+# Fichiers et dossiers à ignorer
+*.class
+*.jar
+*.war
+*.iml
+/.idea/
+/.vscode/
+/target/
+/build/

@@ -1,0 +1,6 @@
+- [x] Clarifier le type de projet : Java
+- [x] Créer la structure du projet (src, test, README.md, .gitignore, pom.xml)
+- [x] Ajouter un exemple de code source et de test
+- [x] Générer le fichier copilot-instructions.md
+- [ ] Compiler le projet avec Maven
+- [ ] Vérifier la documentation
