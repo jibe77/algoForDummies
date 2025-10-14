@@ -55,6 +55,10 @@ Pour rechercher des données :
 
 - Dans un deuxième temps, on parcours un graphe en profondeur (DFS, pour Deep-First Search en anglais) afin d'obtenir l'exploration de chaque chemin en totalité. La pile fonctionne sur le principe dernier entré / premier sorti (LIFO). Il est plus détaillé et optimisé, car on est sûr que tous les chemins soient explorés.
 
+- Ensuite on passe à l'analyse de graphe en vue d'obtenir un arbre couvrant minimal afin de trouver le chemin le plus court :
+  - au prélable il faut savoir utiliser des files de priorités afin de trier les sommets par ordre de priorité, cela sera utile plus tard dans la mise en oeuvre d'algorithme glouton,
+    - ensuite on exploite les algorithe de Prim et de Kruskal afin de parcourir le graphe sommet par sommet. Ils sélectionnent les arêtes de coefficiant minimal parmi l'ensemble des arêtes, en évitant de réutiliser des sommets afin de ne pas créer une boucle. Les deux algorithmes ont néanmoins des méthodes différentes aboutissants à des résultats différents.
+    - TODO
 ## Compilation
 Utilisez Maven ou Gradle pour compiler et exécuter le projet.
 
