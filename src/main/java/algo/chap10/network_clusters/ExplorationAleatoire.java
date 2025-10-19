@@ -9,12 +9,11 @@ import java.util.Set;
 import java.util.LinkedHashMap;
 
 /**
- * Échantillonnage aléatoire d'un chemin entre deux sommets, inspiré de l'exemple NetworkX.
+ * Traduction Java de l’exploration aléatoire d’un chemin entre deux sommets du graphe.
  *
- * <p>On utilise la même structure de graphe orienté que dans {@link DegresDeSeparation} : chaque
- * entrée de la map correspond aux arcs sortants d'un sommet. L'exploration énumère tous les chemins
- * simples entre A et H, puis en sélectionne un pseudo-aléatoirement en reproduisant la graine du
- * script Python (seed = 0).</p>
+ * <p>En reprenant la même structure orientée que {@link DegresDeSeparation}, la classe énumère tous
+ * les chemins simples entre A et H puis en tire un pseudo-aléatoirement à l’aide d’un {@link Random}
+ * initialisé avec la graine attendue (seed = 0), de manière à reproduire l’expérience NetworkX.</p>
  */
 public final class ExplorationAleatoire {
 

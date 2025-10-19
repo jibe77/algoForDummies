@@ -1,13 +1,24 @@
 package algo.chap10.network_clusters;
+
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.JFrame;
+
 import edu.uci.ics.jung.algorithms.layout.SpringLayout;
 import edu.uci.ics.jung.graph.Graph;
 import edu.uci.ics.jung.graph.SparseMultigraph;
 import edu.uci.ics.jung.visualization.VisualizationViewer;
 import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer;
-import javax.swing.JFrame;
-import java.awt.Color;
-import java.awt.Dimension;
+
+/**
+ * Visualisation simplifiée du réseau de Zachary avec la pile JUNG.
+ *
+ * <p>La classe instancie les 34 membres du club, ajoute un sous-ensemble représentatif d’arêtes,
+ * applique un layout à ressort pour positionner les sommets puis ouvre une fenêtre Swing affichant
+ * le graphe avec labels centrés et nœuds cyan, à la manière de l’exemple NetworkX.</p>
+ */
 public class KarateClubGraph {
     public static void main(String[] args) {
         // Create a graph

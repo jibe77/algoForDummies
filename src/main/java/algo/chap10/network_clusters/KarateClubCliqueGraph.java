@@ -24,12 +24,12 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
 /**
- * Traduction Java de l'exemple NetworkX pour le graphe Karate Club.
+ * Implémentation combinée JGraphT/JUNG de la détection de communautés dans le réseau de Zachary.
  *
- * <p>Cette version construit un graphe non orienté, calcule toutes les cliques de taille au moins 4
- * puis regroupe ces cliques via l'algorithme des communautés k-cliques (k = 4). Enfin, elle expose
- * le sous-graphe induit par les nœuds appartenant aux communautés trouvées. Le rendu graphique n’est
- * pas géré ici, mais le sous-graphe est prêt à être passé à un outil de visualisation.</p>
+ * <p>Le graphe non orienté est reconstitué, les cliques de taille ≥ 4 sont listées avec
+ * {@link BronKerboschCliqueFinder}, puis regroupées en communautés k-cliques avant d’être projetées
+ * dans un sous-graphe visualisé (layout à ressort, nœuds orange) afin d’illustrer visuellement les
+ * groupes détectés, exactement comme dans l’exemple NetworkX.</p>
  *
  * <p><strong>Remarque :</strong> La liste d'arêtes ci-dessous forme un sous-ensemble cohérent du
  * réseau original de Zachary afin de garder l'exemple autonome. Pour travailler sur l'intégralité du

@@ -15,11 +15,11 @@ import edu.uci.ics.jung.visualization.decorators.ToStringLabeller;
 import edu.uci.ics.jung.visualization.renderers.Renderer;
 
 /**
- * Traduction Java du petit exemple NetworkX illustrant les degrés de séparation.
+ * Reprise fidèle de l'exemple NetworkX qui illustre les degrés de séparation sur un petit graphe.
  *
- * <p>Le programme construit un graphe orienté en reprenant les arêtes définies dans le dictionnaire
- * Python, applique un layout de type ressort, puis affiche le résultat dans une fenêtre Swing avec
- * une mise en forme similaire (nœuds bleus, labels centrés).</p>
+ * <p>La classe reconstruit les relations dirigées du dictionnaire Python, applique un layout de type
+ * ressort via JUNG, puis ouvre une fenêtre Swing affichant les nœuds bleus étiquetés et leurs arcs,
+ * ce qui permet d’observer visuellement la structure du réseau.</p>
  */
 public final class DegresDeSeparation {
 

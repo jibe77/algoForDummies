@@ -65,7 +65,18 @@ Ensuite on passe à l'analyse de graphe en vue d'obtenir un arbre couvrant minim
 La file de priorité est le cœur commun de Prim et Dijkstra, car elle permet de toujours choisir le prochain élément optimal (minimum) efficacement.
 
 Kruskal, lui, l’utilise de manière implicite pour trier ou sélectionner les arêtes par ordre croissant.
-  
+
+### Chapitre 10 : analyse de graphe
+
+- KarateClubGraph : crée une version simplifiée du réseau de Zachary (34 nœuds) avec JUNG, ajoute un sous-ensemble d’arêtes, puis visualise le graphe dans une fenêtre Swing via un layout à ressorts et des étiquettes centrées.
+
+- KarateClubCliqueGraph : combine JGraphT (détection des cliques de taille ≥4 et regroupement en communautés k-cliques) et JUNG (visualisation du sous-graphe induit) pour illustrer l’analyse communautaire du réseau de Zachary, tout en journalisant les cliques et communautés détectées.
+
+- DegresDeSeparation : construit un graphe orienté reprenant la carte des relations A→H, applique un layout à ressorts avec JUNG, puis ouvre une fenêtre Swing pour visualiser les nœuds bleus étiquetés et leurs arcs, reproduisant l’exemple NetworkX sur les degrés de séparation.
+
+- ExplorationAleatoire : recense tous les chemins simples de A vers H dans le même graphe, les affiche dans la console et choisit l’un d’eux pseudo-aléatoirement à l’aide d’une graine paramétrable (seed 0 dans main pour coller au script Python).
+
+
 ## Compilation
 Utilisez Maven ou Gradle pour compiler et exécuter le projet.
 
