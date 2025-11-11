@@ -76,6 +76,95 @@ Kruskal, lui, l’utilise de manière implicite pour trier ou sélectionner les 
 
 - ExplorationAleatoire : recense tous les chemins simples de A vers H dans le même graphe, les affiche dans la console et choisit l’un d’eux pseudo-aléatoirement à l’aide d’une graine paramétrable (seed 0 dans main pour coller au script Python).
 
+### Chapitre 11 : fonctionnement d'un moteur de recherche avec PageRank
+
+PageRank est un algorithme de classement des pages web basé sur la structure du graphe des liens.
+L’algorithme PageRank calcule un score d’importance pour chaque page d’un graphe de liens (web, réseau social, etc.).
+Une page est jugée importante si d’autres pages importantes pointent vers elle.
+Les liens entre les pages peuvent être représentés sous forme de graphes, avec des liens entre les sommets.
+
+### Chapitre 12 : gérer les grandes données avec le filtre de bloom
+
+Un filtre de Bloom est une structure de données très compacte qui permet de répondre à la question :
+“Est-ce que cet élément est probablement présent dans un ensemble ?”
+
+Quand on ajoute un élément (par exemple "chat"), on :
+  * Calcule plusieurs hachages différents (disons 3),
+  * Chaque hachage donne une position dans le tableau,
+  * On met un 1 dans chacune de ces positions.
+
+Pour vérifier si "chat" est présent :
+  * On recalcule ses 3 hachages,
+  * On regarde si les cases correspondantes sont toutes à 1.
+    Si oui → “probablement présent”
+    Si non → “certainement absent”
+
+Mais avec une subtilité :
+Il peut dire faux-positif (“peut-être présent” alors qu’il ne l’est pas),
+Mais jamais faux-négatif (il ne dira jamais “absent” si l’élément a bien été ajouté).
+C’est donc un test de présence probabiliste.
+
+Le taux de faux positifs dépend de :
+  * Taille du tableau (plus il est grand, mieux c’est),
+  * Nombre d’éléments insérés,
+  * Nombre de fonctions de hachage.
+
+### Chapitre 13 : MapReduce afin de traiter en parrallèle les tâches lourdes
+
+L'algorithme MapReduce permet de distribuer les tâches entre les threads du processeurs.
+Cette logique de répartition des charges est applicable également dans les système distribués tel que Hadoop.
+Le code mis en place effectue un calcul calculant le nombre d'occurences de tel mot dans un livre.
+On remarque que le traitement prend moins de temps en utilisant les 8 coeurs de mon processus (jusqu'à 350 ms contre 500 / 600 ms sur un simple coeur).
+
+### Chapitre 14 : Compression à la volée grâche à l'algorithme LZW
+
+L’algorithme LZW (Lempel–Ziv–Welch) est une méthode de compression sans perte, utilisée pour réduire la taille des données textuelles ou binaires.
+Il repose sur la détection de séquences répétées dans le flux d’entrée et leur remplacement par des codes numériques plus courts.
+LZW est particulièrement efficace lorsque les données contiennent des motifs récurrents, comme dans un texte ou une image indexée.
+
+Au démarrage, l’algorithme initialise un dictionnaire contenant les 256 symboles ASCII de base.
+Chaque caractère est donc associé à un code numérique (par exemple : 'A' → 65, 'B' → 66, etc.).
+
+L’algorithme parcourt ensuite le texte caractère par caractère.
+Il maintient une séquence courante s, et tente d’y ajouter le caractère suivant c.
+Si la nouvelle séquence s + c existe déjà dans le dictionnaire, on continue à l’allonger.
+Sinon, la séquence s est considérée comme maximale :
+Son code est ajouté à la sortie compressée.
+La nouvelle séquence s + c est ajoutée au dictionnaire avec un nouveau code (généralement à partir de 256).
+Le processus reprend à partir de c.
+
+Comme pour la compression, on initialise un dictionnaire contenant les 256 symboles ASCII.
+Mais cette fois, les clés sont les codes et les valeurs sont les chaînes de caractères correspondantes.
+
+L’algorithme lit successivement les codes compressés :
+    Le premier code est directement converti en son caractère.
+    Pour chaque code suivant :
+        S’il existe déjà dans le dictionnaire, on récupère la chaîne correspondante.
+        S’il n’existe pas encore (cas particulier propre à LZW), cela signifie qu’il représente la séquence :
+            (chaîne précédente + premier caractère de la chaîne précédente).
+        Une nouvelle entrée est ajoutée au dictionnaire, formée de :
+            (chaîne du code précédent) + (premier caractère de la chaîne actuelle).
+        On ajoute la chaîne obtenue à la sortie décompressée.
+
+Les algorithmes de compression et décompression LZW fonctionnent en parfaite symétrie :
+le premier apprend progressivement les motifs du texte,
+tandis que le second les reconstitue à partir des codes enregistrés.
+Ce mécanisme, à la fois élégant et performant, a fait de LZW un pilier de la compression de données dans des formats historiques tels que GIF, TIFF ou encore PDF.
+
+### Chapitre 15 : Traiter les problèmes complexes
+
+Ce chapitre introduit les algorithmes gloutons et les problèmes complexe, appelés NP-complets, signifiant non déterministes polynomial. La caractéristique de ces derniers est que leur complexité est beaucoup trop élevée pour être résolue.
+Le temps polynomial permet d'exprimer cette complexité, n représentant le nombre d'entrées :
+    * temps linéraire : O(n1)
+    * complexité quadratique : O(n^2)
+    * complexité cubique : O(n^3)
+    * temps exponentiel : O(c^n)
+
+Pour expliquer le fonctionnement des algorithmes gloutons, il y a des exemples de rendu de monnaie et d'algo de Huffman pour compresser le code de l'ADN. Ce dernier fonctionne de cette manière : 
+    1. génère une séquence aléatoire d’ADN selon des fréquences données,
+    2. compte les fréquences des lettres,
+    3. construit un tas binaire personnalisé (BinaryHeap),
+    4. et illustre un schéma de codage simplifié (pré-Huffman).
 
 ## Compilation
 Utilisez Maven ou Gradle pour compiler et exécuter le projet.
