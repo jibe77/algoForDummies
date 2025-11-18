@@ -166,6 +166,118 @@ Pour expliquer le fonctionnement des algorithmes gloutons, il y a des exemples d
     3. construit un tas binaire personnalisé (BinaryHeap),
     4. et illustre un schéma de codage simplifié (pré-Huffman).
 
+### Chapitre 16 : Utiliser la programmation dynamique
+
+La programmation dynamique est une technique d'optimisation qui résout des problèmes complexes en les décomposant en sous-problèmes plus simples. L'idée est d'éviter de recalculer plusieurs fois les mêmes sous-problèmes. On stocke les résultats intermédiaires pour les réutiliser, ce qui améliore considérablement la complexité, parfois jusqu'à la rendre polynomiale.
+Deux approches :
+    * Top-down (mémoïsation) : On part du problème global et on descend récursivement, en mémorisant les résultats dans un cache
+    * Bottom-up (tabulaire) : On commence par résoudre les plus petits sous-problèmes et on construit progressivement la solution finale dans un tableau
+Un exemple de code fourni en annexe décrit un algorithme calculant une suite de Fibonacci avec et sans la mise en place d'un cache.
+Ce mécanisme de cache utilisé dans l'approche top-down est appelé la mémoïsation.
+
+Il y a un rapport entre le problème TSP (Travelling Salesman Problem) et la programmation dynamique car cela permet de passer d'une complexité O(n!) de la force brute à O(n² × 2ⁿ). Cela fonctionne en stockant les distances minimales pour chaque sous-ensemble de villes visitées, évitant ainsi de recalculer les mêmes combinaisons. On construit la solution petit à petit, en réutilisant intelligemment ce qu'on a déjà calculé !
+
+L'algorithme de Levenshtein, que l'on utilise avec les correcteurs orthographiques et les comparateurs d'ADN, calcule la distance d'édition entre deux chaînes : le nombre minimum d'opérations (insertion, suppression, substitution) pour transformer une chaîne en une autre.
+Exemple : "chat" → "chien"
+La distance entre "chat" et "chien" dépend de la distance entre des préfixes plus courts ("cha" et "chi", "ch" et "ch", etc.)
+Pour calculer plusieurs distances, on résout les mêmes sous-problèmes (comparaisons de préfixes).
+C'est exactement le même principe que Fibonacci ou TSP :
+    * On évite de recalculer les mêmes comparaisons de sous-chaînes
+    * On utilise l'approche bottom-up (on remplit le tableau progressivement)
+    * Complexité : O(m × n) au lieu d'exponentiel sans DP
+
+### Chapitre 17 : Utiliser les algo probabilistes
+
+Cela permet de réduire le temps qu'un algo va prendre pour résoudre un problème.
+
+On peut utiliser différentes techniques : 
+    * algo de Monte Carlo limite la durée des déroulement de la recherche, même s'il y a le risque de ne pas y arriver
+    * algo de Las Vegas continue jusqu'à ce qu'on trouve le résultat, avec le risque de prendre bcp de temps
+
+C'est ce deuxième algorithme qui est utilisé pour faire des tris (quicksort, quickselect).
+
+QuickSelect est un algorithme de sélection qui permet de trouver le k-ième plus petit élément 
+d'une liste sans avoir besoin de la trier entièrement. C'est une variante optimisée du tri QuickSort.
+
+QuickSelect est considéré comme un algorithme probabiliste (ou randomisé) en raison de son utilisation de l'aléatoire dans le choix du pivot. Avec un pivot aléatoire, la complexité ESPÉRÉE est O(n), 
+même si les données sont triées ou organisées de manière défavorable.
+
+QuickSelect est un algorithme de Las Vegas :
+        * Le résultat est toujours correct
+        * Le temps d'exécution est aléatoire
+        * On peut garantir un temps moyen avec forte probabilité
+
+QuickSort est un algorithme de tri par division (divide and conquer) qui fonctionne en trois étapes :
+
+Choisir un pivot (élément de référence) :
+ *  Partitionner la liste autour du pivot
+ *  Trier récursivement les deux parties
+
+Cet algo utilise la méthode Las Vegas car  :
+*  Pivot aléatoire → comportement probabiliste
+*  Las Vegas → résultat toujours correct, temps variable
+*  O(n log n) en moyenne garanti, peu importe les données
+
+### Chapitre 18 : Effectuer une recherche locale
+
+C'est une technique pour résoudre des problèmes d'optimisation quand on cherche la meilleure solution parmi énormément de possibilités.
+
+Au lieu d'explorer toutes les solutions (impossible si c'est trop long), on :
+* Part d'une solution au hasard
+* Regarde les solutions "voisines" (légèrement différentes)
+* Se déplace vers la meilleure voisine
+* Répète jusqu'à ne plus pouvoir améliorer
+
+Cela rejoint des algorithmes de machine learning, et notamment les descentes de gradient avec l'analogie de la montagne.
+
+Pour le voyageur de commerce :
+    Solution initiale : un ordre aléatoire de villes
+    Voisins : on échange 2 villes dans l'ordre
+    Amélioration : on garde l'échange si ça réduit la distance totale
+    On répète jusqu'à ce qu'aucun échange n'améliore
+
+Variantes pour éviter les blocages
+    Recuit simulé : accepte parfois des solutions moins bonnes pour "s'échapper"
+    Recherche tabou : mémorise les solutions déjà visitées
+    Multi-départs : recommence plusieurs fois avec différents points de départ
+
+Le problème de satisfiabilité avec des clauses à 2 variables (2-SAT) dans l'algo RandomWalkSAT est lié avec la recherche locale.
+Il part d'une affectation aléatoire des variables (VRAI/FAUX).
+Tant que toutes les clauses ne sont pas satisfaites :
+    Choisis une clause non satisfaite au hasard
+    Avec probabilité p (par exemple 50%) :
+        Random walk : flip une variable aléatoire de cette clause   
+    Avec probabilité (1-p) :
+        Greedy : flip la variable qui satisfait le plus de clauses
+Si solution trouvée → succès. Sinon après N essais → échec (restart)
+On part d'une solution, On explore les "voisins" (flip une variable = voisin), On améliore progressivement.
+Il y a un Risque de minimum local comme dans une descende de gradient.
+
+### Chapitre 19 : Faire appel à la programmation linéaire
+
+Consiste à trouver la meilleure solution possible (maximiser ou minimiser quelque chose) en respectant des règles simples et proportionnelles.
+
+Pour résumer : 
+* On a des règles (on ne peut pas tout faire).
+* On veut gagner le plus d’argent possible en respectant les règles.
+* On dessine toutes les solutions possibles et on choisit la meilleure.
+* Le code affiche ça et trouve le meilleur point parmi ceux qu’il teste.
+
+### Chapitre 20 : Découverte de l'heuristique
+
+Une heuristique c’est comme une petite odeur ou une carte approximative qui te dit « cet endroit a l’air plus proche de la sortie ». Ce n’est pas la vérité absolue, c’est juste un bon indice pour t’aider à choisir où aller en premier.
+
+Le programme crée un labyrinthe sous forme de points reliés entre eux (un graphe).
+Il utilise deux façons de chercher un chemin :
+Best‑first : il suit toujours le point qui, d’après l’odeur (l’heuristique), est le plus proche de la sortie. Rapide, mais parfois il choisit un chemin qui semble près mais qui tourne en cul‑de‑sac.
+A* : il regarde deux choses à la fois — le chemin déjà parcouru (combien tu as marché) et l’odeur (combien il reste selon l’heuristique). Ça aide à prendre de meilleurs choix : A* peut trouver le chemin le plus court si l’odeur ne ment pas trop.
+
+Le code utilise la distance « Manhattan » comme heuristique. Si on est dans une ville en damier (rues verticales et horizontales), la distance Manhattan entre deux maisons est le nombre de rues que tu dois traverser en allant tout droit et en tournant uniquement à droite/gauche (pas en diagonale).
+
+### Chapitre 21 : Nouveaux algorithmes
+
+TODO
+
 ## Compilation
 Utilisez Maven ou Gradle pour compiler et exécuter le projet.
 
